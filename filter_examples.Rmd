@@ -1,0 +1,50 @@
+---
+title: "filter_examples"
+author: "Devin"
+date: "June 2, 2014"
+output: html_document
+---
+
+# Intro
+This document will outline some basic uses of Hadley Wickham's [dplyr package](www.github.com/hadley/dplyr). 
+
+# Load Libraries and Data
+```{r setup}
+libraries <- c(
+  "knitr",
+  "ggplot2",
+  "magrittr",
+  "dplyr",
+  "PKPDdatasets")
+lapply(libraries, require, character.only = TRUE)
+knitr::opts_chunk$set(tidy = FALSE)
+```
+
+# Basics
+
+## select 
+
+
+## filter
+```{r}
+dat1 <- sd_oral_richpk
+names(dat1) <- toupper(names(dat1))
+
+id_dat1 <- dat1 %>% group_by(ID)
+# lowest 2 concentration values
+filter(id_dat1,min_rank(CONC) <= 2) %>% head(n = 10)
+
+# highest 2 concentration values
+filter(id_dat1, min_rank(desc(CONC)) <= 2) %>% head(n = 10)
+
+# all observations greater than mean
+filter(id_dat1, CONC > mean(CONC)) %>% head(n = 10)
+```
+
+## mutate
+
+## summarize
+
+## arrange
+
+
